@@ -1,19 +1,61 @@
 import React from 'react'
-import { FOUNDRIES } from './common/constants'
-import FoundriesCard from './ui/FoundriesCard'
+import GridCards from './ui/GridCards'
+import foundriesImage from '@/assets/block.webp'
 
+export const FOUNDRIES = [
+  {
+    title: 'Назва Збору',
+    description: 'Опис збору. Ми збираємо на машинку, нам треба зібрати 40к, наразі маємо 10к. Якщо ти ухилес, то маєш взагали закрити збір...',
+    button: 'Задонатити',
+    image: foundriesImage,
+    variant: 'horizontal',
+    size: 'medium',
+  },
+  {
+    title: 'Назва Збору',
+    description: 'Опис збору. Ми збираємо на машинку, нам треба зібрати 40к, наразі маємо 10к. Якщо ти ухилес, то маєш взагали закрити збір...',
+    button: 'Задонатити',
+    image: foundriesImage,
+    variant: 'horizontal',
+    size: 'medium',
+  },
+  {
+    title: 'Назва Збору',
+    description: 'Опис збору. Ми збираємо на машинку, нам треба зібрати 40к, наразі маємо 10к. Якщо ти ухилес, то маєш взагали закрити збір...',
+    button: 'Задонатити',
+    image: foundriesImage,
+    variant: 'vertical',
+    size: 'small',
+  },
+  {
+    title: 'Назва Збору',
+    description: 'Опис збору. Ми збираємо на машинку, нам треба зібрати 40к, наразі маємо 10к. Якщо ти ухилес, то маєш взагали закрити збір...',
+    button: 'Задонатити',
+    image: foundriesImage,
+    variant: 'vertical',
+    size: 'small',
+  },
+  {
+    title: 'Назва Збору',
+    description: 'Опис збору. Ми збираємо на машинку, нам треба зібрати 40к, наразі маємо 10к. Якщо ти ухилес, то маєш взагали закрити збір...',
+    button: 'Задонатити',
+    image: foundriesImage,
+    variant: 'vertical',
+    size: 'small',
 
-export default function ImportantFoundries({ data }: { data: typeof FOUNDRIES }) {
+  },
+]
+
+export const IMPORTANT_FOUNDRIES_CONTENT = {
+  section: 'Важливі збори',
+  foundries: FOUNDRIES,
+}
+
+export default function ImportantFoundries() {
   return (
     <div className='grid gap-10'>
-      <p className='text-1xl text-orange-400'>Важливі збори</p>
-      <div className="grid grid-rows-1 grid-cols-6 gap-6">
-
-        {data.map((data, index) => (
-          <FoundriesCard key={index} {...data} />
-        ))}
-
-      </div>
+      <p className='text-1xl text-orange-400'>{IMPORTANT_FOUNDRIES_CONTENT.section}</p>
+      <GridCards />
     </div>
   )
 }
