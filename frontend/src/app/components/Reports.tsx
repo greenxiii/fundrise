@@ -1,5 +1,4 @@
 import React from 'react'
-import GridCards from './ui/GridCards'
 
 export const REPORTS_CONTENT = {
     section: 'Звіти',
@@ -18,8 +17,6 @@ export default function Reports() {
                     </p>
                 </div>
             </div>
-
-            <GridCards />
         </div>
     )
 }
