@@ -56,6 +56,39 @@ export interface FAQContent {
   }>
 }
 
+export interface Vacancy {
+  title: string
+  description: string
+  image: {
+    url: string
+    title: string
+  }
+  contract?: string
+  salary?: string
+  age?: string
+  button: string
+}
+
+export interface VacanciesContent {
+  section: string
+  title: string
+  button: string
+  vacancies: Vacancy[]
+  images?: Array<{
+    url: string
+    title: string
+  }>
+}
+
+export interface ContactContent {
+  title: string
+  description: string
+  phone: string
+  email: string
+  instagramUrl?: string
+  facebookUrl?: string
+}
+
 export interface CommanderContent {
   section: string
   title: string

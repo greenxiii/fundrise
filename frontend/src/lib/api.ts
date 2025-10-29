@@ -5,7 +5,9 @@ import client, {
   CommanderContent, 
   DivisionsContent, 
   ReportsContent,
-  FAQContent
+  FAQContent,
+  VacanciesContent,
+  ContactContent
 } from './contentful'
 
 // Types for Contentful API responses
@@ -338,6 +340,123 @@ export async function getFAQContent(): Promise<FAQContent> {
   }
 }
 
+// Fetch Vacancies content
+export async function getVacanciesContent(): Promise<VacanciesContent> {
+  try {
+    // Check if Contentful is configured
+    if (!process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID || !process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN) {
+      console.warn('Contentful not configured, using fallback data')
+      throw new Error('Contentful not configured')
+    }
+
+    // Find the vacancies entry by content type
+    // Include assets to get image data
+    const entries = await client.getEntries({
+      content_type: 'vacancies',
+      limit: 1,
+      include: 10 // Include up to 10 levels of linked assets (images)
+    })
+    
+    if (entries.items.length === 0) {
+      throw new Error('No vacancies entries found')
+    }
+    
+    const response = entries.items[0]
+    const fields = response.fields as unknown as {
+      section?: string
+      title?: string
+      button?: string
+      vacancies?: Array<{
+        title?: string
+        description?: string
+        contract?: string
+        salary?: string
+        age?: string
+        button?: string
+      }>
+      images?: ContentfulImageLink[]
+    }
+    
+    // Extract and process images array if it exists
+    const imageAssets: Array<{ url: string; title: string }> = []
+    if (fields.images && Array.isArray(fields.images)) {
+      for (const image of fields.images) {
+        let imageUrl = '/blank.png' // fallback
+        let imageTitle = 'Vacancy Image' // fallback
+        
+        // Check if image is a link that needs resolution
+        if (image.sys) {
+          const assetId = image.sys.id
+          const asset = entries.includes?.Asset?.find((a) => a.sys.id === assetId)
+          if (asset && asset.fields?.file?.url) {
+            imageUrl = asset.fields.file.url.startsWith('//') 
+              ? `https:${asset.fields.file.url}` 
+              : asset.fields.file.url
+            imageTitle = asset.fields.title || imageTitle
+          }
+        } else if (image.fields?.file?.url) {
+          imageUrl = image.fields.file.url.startsWith('//') 
+            ? `https:${image.fields.file.url}` 
+            : image.fields.file.url
+          imageTitle = image.fields.title || imageTitle
+        } else if (image.url) {
+          imageUrl = image.url
+          imageTitle = image.title || imageTitle
+        }
+        
+        imageAssets.push({ url: imageUrl, title: imageTitle })
+      }
+    }
+    
+    // Transform vacancies array and match with images by position
+    const vacancies = (fields.vacancies || []).map((vacancy, index) => {
+      // Get image for this position, or use fallback
+      const matchedImage = imageAssets[index] || { url: '/blank.png', title: 'Vacancy Image' }
+      
+      return {
+        title: vacancy.title || '',
+        description: vacancy.description || '',
+        contract: vacancy.contract || '',
+        salary: vacancy.salary || '',
+        age: vacancy.age || '',
+        button: vacancy.button || 'Долучитись',
+        image: {
+          url: matchedImage.url,
+          title: matchedImage.title
+        }
+      }
+    })
+    
+    return {
+      section: fields.section || 'Вакансії',
+      title: fields.title || 'Усі вакансії',
+      button: fields.button || 'Усі вакансії',
+      vacancies
+    }
+  } catch {
+    // Return fallback data
+    return {
+      section: 'Вакансії',
+      title: 'Усі вакансії',
+      button: 'Усі вакансії',
+      vacancies: [
+        {
+          title: 'Пілот FPV',
+          description: 'Кандидат з досвідом роботи в технічній, комп\'ютерній галузі. Володіння технічними засобами не принципово. Технолог, програміст, паяльник. Водійське посвідчення категорії В. Вміння паяти, обслуговувати та ремонтувати електроніку. Досвід обслуговування, діагностики й ремонту електроніки. Високі навички пілотної майстерності.',
+          contract: 'Контракт 18-24 -1 млн.грн',
+          salary: 'Заробітня плата від 120к грн',
+          age: 'Вік: від 18 до 25',
+          button: 'Долучитись',
+          image: {
+            url: '/blank.png',
+            title: 'Vacancy Image'
+          }
+        }
+      ]
+    }
+  }
+}
+
 // Fetch Commander content
 export async function getCommanderContent(): Promise<CommanderContent> {
   try {
@@ -411,6 +530,39 @@ export async function getDivisionsContent(): Promise<DivisionsContent> {
           }
         }
       ]
+    }
+  }
+}
+
+// Fetch Contact content
+export async function getContactContent(): Promise<ContactContent> {
+  try {
+    // Check if Contentful is configured
+    if (!process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID || !process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN) {
+      console.warn('Contentful not configured, using fallback data')
+      throw new Error('Contentful not configured')
+    }
+
+    const entries = await client.getEntries({
+      content_type: 'contact',
+      limit: 1
+    })
+    
+    if (entries.items.length === 0) {
+      throw new Error('No contact entries found')
+    }
+    
+    const response = entries.items[0]
+    return response.fields as unknown as ContactContent
+  } catch {
+    // Return fallback data
+    return {
+      title: 'ПРИЄДНУЙСЯ — КОЖНА ДОПОМОГА ВАЖЛИВА ДЛЯ НАШИХ ЗАХИСНИКІВ.',
+      description: 'Нам неважливо, ким ви є — волонтером, що плете сітки у вільний час, чи підприємцем, який може допомогти фінансово. Кожна дія, кожен внесок — важливі. Саме завдяки людям, які роблять що можуть, ми разом підтримуємо наших бійців і наближаємо перемогу.',
+      phone: '+380937823787',
+      email: 'charitableorganization@gmail.com',
+      instagramUrl: '',
+      facebookUrl: ''
     }
   }
 }

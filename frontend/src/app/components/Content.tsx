@@ -4,6 +4,8 @@ import Reports from './Reports';
 import AboutUs from './AboutUs';
 import ImportantFoundries from './ImportantFoundries';
 import FAQ from './FAQ';
+import Vacancies from './Vacancies';
+import Contact from './Contact';
 
 export default function Content() {
   return (
@@ -15,6 +17,8 @@ export default function Content() {
         {/* <Divisions /> */}
         <Reports />
         <FAQ />
+        <Vacancies />
+        <Contact />
       </div>
   )
 }
