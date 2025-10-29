@@ -11,6 +11,9 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-unbounded: var(--font-unbounded);
+  --color-orange-400: #F5A428;
+  --color-orange-500: #F39200;
+  --color-orange-600: #E08400;
 }
 
 @media (prefers-color-scheme: dark) {

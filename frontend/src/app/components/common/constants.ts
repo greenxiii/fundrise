@@ -63,9 +63,10 @@ export const DIVISIONS = [
 
 export const NAV_LINKS = [
   { href: '#about', label: 'Про нас' },
-  { href: '#fundraising', label: 'Збори' },
   { href: '#charity', label: 'Благодійний фонд' },
-  { href: '#commander', label: 'Командир' },
-  { href: '#units', label: 'Підрозділи' },
+  { href: '#fundraising', label: 'Збори' },
   { href: '#reports', label: 'Звіти' },
+  { href: '#questions', label: 'Питання' },
+  { href: '#vacancies', label: 'Вакансії' },
+  { href: '#help', label: 'Допомога' },
 ];

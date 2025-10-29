@@ -40,11 +40,19 @@ export interface ImportantFoundriesContent {
 export interface PaymentDetailsContent {
   section: string
   title: string
-  description: string
+  button: string
   paymentMethods: Array<{
-    name: string
-    details: string
-    icon?: string
+    title: string
+    content: string
+  }>
+}
+
+export interface FAQContent {
+  section: string
+  title: string
+  questions: Array<{
+    title: string
+    content: string
   }>
 }
 
@@ -79,15 +87,17 @@ export interface Report {
   title: string
   date: string
   description: string
-  file?: {
+  image: {
     url: string
     title: string
   }
+  variant: 'horizontal' | 'vertical'
 }
 
 export interface ReportsContent {
   section: string
   title: string
+  subtitle: string
   description: string
   reports: Report[]
 }

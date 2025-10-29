@@ -49,7 +49,7 @@ export default function AboutUs() {
                 <span className='text-7xl text-4xl font-bold text-white'>
                     <p>{content.header.title}</p>
                     <p>{content.header.subtitle}</p>
-                    <Button variant='outline' className='absolute right-0 bottom-0'>{content.button}</Button>
+                    {content.button && <Button variant='outline' className='absolute right-0 bottom-0 cursor-pointer'>{content.button}</Button>}
                 </span>
                
             </div>

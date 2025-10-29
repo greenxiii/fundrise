@@ -25,7 +25,11 @@ module.exports = {
         },
         colors: {
           black: 'black',
-          orange: '#F39200',
+          orange: {
+            400: '#F5A428',
+            500: '#F39200',
+            600: '#E08400',
+          },
         },
       },
     },

@@ -1,22 +1,21 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import { Button } from './ui/Button'
 import CollapseBlock from './ui/CollapseBlock'
-import { getPaymentDetailsContent } from '@/lib/api'
-import { PaymentDetailsContent } from '@/lib/contentful'
+import { getFAQContent } from '@/lib/api'
+import { FAQContent } from '@/lib/contentful'
 
-export default function PaymentOptions() {
-    const [content, setContent] = useState<PaymentDetailsContent | null>(null)
+export default function FAQ() {
+    const [content, setContent] = useState<FAQContent | null>(null)
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         async function fetchContent() {
             try {
-                const data = await getPaymentDetailsContent()
+                const data = await getFAQContent()
                 setContent(data)
             } catch (error) {
-                console.error('Error fetching Payment Details content:', error)
+                console.error('Error fetching FAQ content:', error)
             } finally {
                 setLoading(false)
             }
@@ -32,7 +31,6 @@ export default function PaymentOptions() {
                     <div className="h-6 bg-gray-300 rounded w-48 mb-4"></div>
                     <div className="col-span-2">
                         <div className="h-16 bg-gray-300 rounded w-3/4 mb-4"></div>
-                        <div className="h-10 bg-gray-300 rounded w-48"></div>
                     </div>
                 </div>
                 <div className="grid grid-cols-2 gap-6 mt-22">
@@ -54,15 +52,15 @@ export default function PaymentOptions() {
                 <p className='text-1xl text-orange-400 col-span-1'>{content.section}</p>
                 <div className='col-span-2'>
                     <p className='text-white text-6xl font-bold'>{content.title}</p>
-                    {content.button && <Button variant="outline" className="self-start mt-12 cursor-pointer">{content.button}</Button>}
                 </div>
             </div>
 
             <div className='grid grid-cols-2 gap-6 mt-22'>
-                {content.paymentMethods.map((option, index) => (
-                    <CollapseBlock key={index} title={option.title} content={option.content} />
+                {content.questions.map((question, index) => (
+                    <CollapseBlock key={index} title={question.title} content={question.content} />
                 ))}
             </div>
         </div>
     )
 }
+
