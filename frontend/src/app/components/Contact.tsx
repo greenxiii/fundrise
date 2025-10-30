@@ -42,8 +42,8 @@ export default function Contact() {
     }
 
     return (
-        <div className="text-white">
-            <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 uppercase leading-tight text-center">
+        <div id="help" className="text-white">
+            <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-5xl font-bold mb-4 md:mb-6 uppercase leading-tight text-center">
                 {content.title}
             </h2>
             <p className="text-sm sm:text-base mb-6 md:mb-10 text-center max-w-3xl mx-auto px-4">

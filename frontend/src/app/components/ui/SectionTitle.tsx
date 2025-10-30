@@ -9,6 +9,6 @@ interface SectionTitleProps {
 export const SectionTitle: React.FC<SectionTitleProps> = ({ subtitle, children, className = '' }) => (
   <div className={`mb-8 ${className}`}>
     <span className="text-sm uppercase tracking-widest text-[#FF9F1C]">{subtitle}</span>
-    <h2 className="text-2xl md:text-5xl font-extrabold text-white mt-2">{children}</h2>
+    <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-5xl font-extrabold text-white mt-2">{children}</h2>
   </div>
 ); 

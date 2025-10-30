@@ -47,11 +47,11 @@ export default function Reports() {
     }
 
     return (
-        <div className='grid gap-8 md:gap-10 text-white'>
+        <div id='reports' className='grid gap-8 md:gap-10 text-white'>
             <div className='grid gap-4 md:gap-10 grid-cols-1 md:grid-cols-3'>
                 <p className='text-sm md:text-base text-orange-400 md:col-span-1'>{content.section}</p>
                 <div className='md:col-span-2'>
-                    <p className='text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold break-normal leading-tight md:leading-[72px] lg:leading-[82px]'>
+                    <p className='text-2xl sm:text-4xl md:text-5xl lg:text-5xl font-bold break-normal leading-tight md:leading-[72px] lg:leading-[72px]'>
                         {content.title} <br />
                         {content.subtitle && <span className='text-orange-400'>{content.subtitle}</span>}
                     </p>

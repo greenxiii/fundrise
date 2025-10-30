@@ -43,14 +43,14 @@ export default function AboutUs() {
     }
 
     return (
-        <div>
+        <div id="about">
             <p className='text-sm md:text-base text-orange-400'>{content.section}</p>
             <div className='relative mt-6 md:mt-10'>
                 <span className='font-bold text-white'>
-                    <p className='text-2xl sm:text-4xl md:text-5xl lg:text-7xl leading-tight md:leading-snug'>
+                    <p className='text-2xl sm:text-4xl md:text-5xl lg:text-5xl leading-tight md:leading-snug'>
                         {content.header.title}
                     </p>
-                    <p className='text-2xl sm:text-3xl md:text-4xl lg:text-6xl leading-tight md:leading-snug'>
+                    <p className='text-2xl sm:text-4xl md:text-5xl lg:text-5xl leading-tight md:leading-snug'>
                         {content.header.subtitle}
                     </p>
                     {content.button && (
