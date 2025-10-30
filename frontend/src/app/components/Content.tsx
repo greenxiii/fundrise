@@ -6,6 +6,7 @@ import ImportantFoundries from './ImportantFoundries';
 import FAQ from './FAQ';
 import Vacancies from './Vacancies';
 import Contact from './Contact';
+import SimpleTextBlock from './SimpleTextBlock';
 
 export default function Content() {
   return (
@@ -13,6 +14,7 @@ export default function Content() {
         <AboutUs />
         <PaymentOptions />
         <ImportantFoundries />
+        <SimpleTextBlock />
         {/* <Commander /> */}
         {/* <Divisions /> */}
         <Reports />

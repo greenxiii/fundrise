@@ -44,7 +44,7 @@ export default function AboutUs() {
 
     return (
         <div id="about">
-            <p className='text-sm md:text-base text-orange-400'>{content.section}</p>
+            <p className='text-sm md:text-base text-orange-500'>{content.section}</p>
             <div className='relative mt-6 md:mt-10'>
                 <span className='font-bold text-white'>
                     <p className='text-2xl sm:text-4xl md:text-5xl lg:text-5xl leading-tight md:leading-snug'>

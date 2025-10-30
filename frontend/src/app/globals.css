@@ -18,7 +18,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #171717;
     --foreground: #ededed;
   }
 }
@@ -33,6 +33,12 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-unbounded), Arial, Helvetica, sans-serif;
+  /* Global background image */
+  background-image: url('/main_texture.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
 }
 
 h1, h2, h3, h4, h5, h6 {

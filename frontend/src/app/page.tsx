@@ -4,7 +4,7 @@ import Content from './components/Content';
 
 export default function Home() {
   return (
-    <div className='bg-[#101010]'>
+    <div>
       <Header />
       <Content />
       <Footer />

@@ -43,7 +43,7 @@ export default function ImportantFoundries() {
 
   return (
     <div id='fundraising' className='grid gap-10'>
-      <p className='text-1xl text-orange-400'>{content.section}</p>
+      <p className='text-1xl text-orange-500'>{content.section}</p>
       <GridCards foundries={content.foundries} />
     </div>
   )

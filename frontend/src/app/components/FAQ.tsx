@@ -49,7 +49,7 @@ export default function FAQ() {
     return (
         <div id='questions'>
             <div className='grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6'>
-                <p className='text-sm md:text-base text-orange-400 col-span-1'>{content.section}</p>
+                <p className='text-sm md:text-base text-orange-500 col-span-1'>{content.section}</p>
                 <div className='md:col-span-2'>
                     <p className='text-white text-2xl sm:text-4xl md:text-5xl lg:text-5xl font-bold leading-tight'>
                         {content.title}

@@ -48,7 +48,7 @@ export default function Vacancies() {
     return (
         <div id='vacancies'>
             <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 mb-6 md:mb-10">
-                <p className='text-sm md:text-base text-orange-400'>{content.section}</p>
+                <p className='text-sm md:text-base text-orange-500'>{content.section}</p>
                 <div>
                     <Button variant="outline">{content.button}</Button>
                 </div>

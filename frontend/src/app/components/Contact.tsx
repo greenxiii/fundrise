@@ -60,7 +60,7 @@ export default function Contact() {
                 <div className="bg-[#1c1c1c] p-4 md:p-6 flex items-center justify-center md:col-span-3">
                     <a 
                         href={`mailto:${content.email}`}
-                        className="text-white underline hover:text-orange-400 transition-colors break-all"
+                        className="text-white underline hover:text-orange-500 transition-colors break-all"
                     >
                         {content.email}
                     </a>
@@ -73,7 +73,7 @@ export default function Contact() {
                             href={content.instagramUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center justify-center text-orange-400 hover:text-orange-500 transition-colors"
+                            className="flex items-center justify-center text-orange-500 hover:text-orange-500 transition-colors"
                         >
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                 <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
@@ -82,7 +82,7 @@ export default function Contact() {
                             </svg>
                         </a>
                     ) : (
-                        <div className="text-orange-400">
+                        <div className="text-orange-500">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                 <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
                                 <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
@@ -99,14 +99,14 @@ export default function Contact() {
                             href={content.facebookUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center justify-center text-orange-400 hover:text-orange-500 transition-colors"
+                            className="flex items-center justify-center text-orange-500 hover:text-orange-500 transition-colors"
                         >
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                 <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
                             </svg>
                         </a>
                     ) : (
-                        <div className="text-orange-400">
+                        <div className="text-orange-500">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                 <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
                             </svg>
