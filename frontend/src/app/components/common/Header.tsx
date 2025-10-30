@@ -23,13 +23,13 @@ export default function Header() {
       <div className="flex items-center justify-between h-full pt-20 px-8 max-w-7xl mx-auto">
         <div className="flex-2 max-w-2xl">
           <div className="space-y-4">
-            <h1 className="text-white text-5xl font-bold leading-tight">
+            <h1 className="text-white text 2xl sm:text-5xl font-bold leading-tight">
               {HEADER_CONTENT.title}
             </h1>
-            <h2 className="text-white text-5xl font-bold leading-tight">
+            <h2 className="text-white text-2xl sm:text-5xl font-bold leading-tight">
               {HEADER_CONTENT.subtitle}
             </h2>
-            <h3 className="text-white text-5xl font-bold leading-tight">
+            <h3 className="text-white text-2xl sm:text-5xl font-bold leading-tight">
               {HEADER_CONTENT.battalion}
             </h3>
           </div>

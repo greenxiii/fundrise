@@ -44,19 +44,30 @@ export default function AboutUs() {
 
     return (
         <div>
-            <p className='text-1xl text-orange-400'>{content.section}</p>
-            <div className='relative mt-10'>
-                <span className='text-7xl text-4xl font-bold text-white'>
-                    <p>{content.header.title}</p>
-                    <p>{content.header.subtitle}</p>
-                    {content.button && <Button variant='outline' className='absolute right-0 bottom-0 cursor-pointer'>{content.button}</Button>}
+            <p className='text-sm md:text-base text-orange-400'>{content.section}</p>
+            <div className='relative mt-6 md:mt-10'>
+                <span className='font-bold text-white'>
+                    <p className='text-2xl sm:text-4xl md:text-5xl lg:text-7xl leading-tight md:leading-snug'>
+                        {content.header.title}
+                    </p>
+                    <p className='text-2xl sm:text-3xl md:text-4xl lg:text-6xl leading-tight md:leading-snug'>
+                        {content.header.subtitle}
+                    </p>
+                    {content.button && (
+                        <Button 
+                            variant='outline' 
+                            className='mt-6 md:mt-0 md:absolute md:right-0 md:bottom-0 cursor-pointer'
+                        >
+                            {content.button}
+                        </Button>
+                    )}
                 </span>
                
             </div>
-            <div className='grid grid-cols-3 gap-10'>
+            <div className='grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 lg:gap-10'>
                 {content.descriptionBlocks.map((block, index) => (
-                    <div key={index} className='p-10 bg-[#1c1c1c] mt-10 break-words text-sm'>
-                        <p className='text-white text-1xl '>
+                    <div key={index} className='p-6 md:p-8 lg:p-10 bg-[#1c1c1c] mt-6 md:mt-10 break-words text-sm'>
+                        <p className='text-white text-base'>
                             {block.value}
                         </p>
                     </div>

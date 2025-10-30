@@ -43,31 +43,31 @@ export default function Contact() {
 
     return (
         <div className="text-white">
-            <h2 className="text-6xl font-bold mb-6 uppercase leading-tight text-center">
+            <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 uppercase leading-tight text-center">
                 {content.title}
             </h2>
-            <p className="text-base mb-10 text-center max-w-3xl mx-auto">
+            <p className="text-sm sm:text-base mb-6 md:mb-10 text-center max-w-3xl mx-auto px-4">
                 {content.description}
             </p>
             
-            <div className="grid grid-cols-7 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-7 gap-3 md:gap-4">
                 {/* Phone */}
-                <div className="bg-[#1c1c1c] p-6 flex items-center justify-center col-span-2">
-                    <span className="font-bold text-lg">{content.phone}</span>
+                <div className="bg-[#1c1c1c] p-4 md:p-6 flex items-center justify-center md:col-span-2">
+                    <span className="font-bold text-base md:text-lg">{content.phone}</span>
                 </div>
                 
                 {/* Email - spans 2 columns */}
-                <div className="bg-[#1c1c1c] p-6 flex items-center justify-center col-span-3">
+                <div className="bg-[#1c1c1c] p-4 md:p-6 flex items-center justify-center md:col-span-3">
                     <a 
                         href={`mailto:${content.email}`}
-                        className="text-white underline hover:text-orange-400 transition-colors"
+                        className="text-white underline hover:text-orange-400 transition-colors break-all"
                     >
                         {content.email}
                     </a>
                 </div>
                 
                 {/* Instagram */}
-                <div className="bg-[#1c1c1c] p-6 flex items-center justify-center col-span-1">
+                <div className="bg-[#1c1c1c] p-4 md:p-6 flex items-center justify-center">
                     {content.instagramUrl ? (
                         <a 
                             href={content.instagramUrl}
@@ -93,7 +93,7 @@ export default function Contact() {
                 </div>
                 
                 {/* Facebook */}
-                <div className="bg-[#1c1c1c] p-6 flex items-center justify-center col-span-1">
+                <div className="bg-[#1c1c1c] p-4 md:p-6 flex items-center justify-center">
                     {content.facebookUrl ? (
                         <a 
                             href={content.facebookUrl}

@@ -47,12 +47,14 @@ export default function Vacancies() {
 
     return (
         <div>
-            <div className="flex justify-between items-center mb-10">
-                <p className='text-1xl text-orange-400'>{content.section}</p>
-                <Button variant="outline">{content.button}</Button>
+            <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 mb-6 md:mb-10">
+                <p className='text-sm md:text-base text-orange-400'>{content.section}</p>
+                <div>
+                    <Button variant="outline">{content.button}</Button>
+                </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
                 {content.vacancies && content.vacancies.map((vacancy, index) => (
                     <VacancyCard key={index} {...vacancy} />
                 ))}

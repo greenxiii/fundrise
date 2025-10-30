@@ -8,7 +8,7 @@ interface GridCardsProps {
 
 export default function GridCards({ foundries }: GridCardsProps) {
   return (
-    <div className="grid grid-cols-6 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6">
         {foundries?.map((data, index) => (
           <FoundriesCard key={index} {...data} />
         ))}

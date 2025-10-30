@@ -9,7 +9,7 @@ import Contact from './Contact';
 
 export default function Content() {
   return (
-    <div className="grid gap-50 my-30 mx-auto max-w-[calc(100vw-180px)]">
+    <div className="grid gap-20 md:gap-30 lg:gap-50 my-10 md:my-20 lg:my-30 mx-auto px-4 sm:px-6 md:px-8 w-full max-w-7xl">
         <AboutUs />
         <PaymentOptions />
         <ImportantFoundries />

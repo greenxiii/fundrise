@@ -50,15 +50,24 @@ export default function PaymentOptions() {
 
     return (
         <div>
-            <div className='grid grid-cols-3'>
-                <p className='text-1xl text-orange-400 col-span-1'>{content.section}</p>
-                <div className='col-span-2'>
-                    <p className='text-white text-6xl font-bold'>{content.title}</p>
-                    {content.button && <Button variant="outline" className="self-start mt-12 cursor-pointer">{content.button}</Button>}
+            <div className='grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6'>
+                <p className='text-sm md:text-base text-orange-400 md:col-span-1'>{content.section}</p>
+                <div className='md:col-span-2'>
+                    <p className='text-white text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight'>
+                        {content.title}
+                    </p>
+                    {content.button && (
+                        <Button 
+                            variant="outline" 
+                            className="self-start mt-6 md:mt-12 cursor-pointer"
+                        >
+                            {content.button}
+                        </Button>
+                    )}
                 </div>
             </div>
 
-            <div className='grid grid-cols-2 gap-6 mt-22'>
+            <div className='grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mt-10 md:mt-22'>
                 {content.paymentMethods.map((option, index) => (
                     <CollapseBlock key={index} title={option.title} content={option.content} />
                 ))}
