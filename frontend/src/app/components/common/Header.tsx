@@ -12,7 +12,7 @@ export const HEADER_CONTENT = {
 export default function Header() {
   return (
     <div 
-      className="h-screen relative overflow-hidden bg-cover bg-center bg-no-repeat"
+      className="h-screen relative overflow-hidden bg-cover bg-center bg-no-repeat w-full"
       style={{
         backgroundImage: 'url(/hero_bg.png)',
       }}
@@ -20,10 +20,10 @@ export default function Header() {
       <HeaderNav />
       
       {/* Main hero content */}
-      <div className="flex items-center justify-between h-full pt-20 px-8 max-w-7xl mx-auto">
-        <div className="flex-2 max-w-2xl">
+      <div className="flex items-center justify-between flex-wrap h-full pt-20 px-4 sm:px-8 max-w-7xl w-full mx-auto">
+        <div className="max-w-2xl w-full">
           <div className="space-y-4">
-            <h1 className="text-white text 2xl sm:text-5xl font-bold leading-tight">
+            <h1 className="text-white text-2xl sm:text-5xl font-bold leading-tight">
               {HEADER_CONTENT.title}
             </h1>
             <h2 className="text-white text-2xl sm:text-5xl font-bold leading-tight">
@@ -63,7 +63,7 @@ export default function Header() {
         </div>
         
         {/* Right side - Hero shields images */}
-        <div className="flex-1 flex justify-center items-center">
+        <div className="flex-1 md:flex justify-center items-center">
           <div className="flex items-center">
             {/* First shield - layered images */}
             <div className="relative w-52 h-60">
