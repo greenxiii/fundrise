@@ -13,13 +13,13 @@ export default function Content() {
     <div className="grid gap-20 md:gap-30 lg:gap-50 my-10 md:my-20 lg:my-30 mx-auto px-4 sm:px-6 md:px-8 w-full max-w-7xl">
         <AboutUs />
         <PaymentOptions />
-        <ImportantFoundries />
+        <ImportantFoundries limit={5} />
         <SimpleTextBlock />
         {/* <Commander /> */}
         {/* <Divisions /> */}
         <Reports />
         <FAQ />
-        <Vacancies />
+        <Vacancies limit={5} />
         <Contact />
       </div>
   )

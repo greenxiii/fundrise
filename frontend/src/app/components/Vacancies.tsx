@@ -1,14 +1,21 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
+import Link from 'next/link'
 import { Button } from './ui/Button'
 import VacancyCard from './ui/VacancyCard'
+import QuestionnaireModal from './ui/QuestionnaireModal'
 import { getVacanciesContent } from '@/lib/api'
 import { VacanciesContent } from '@/lib/contentful'
 
-export default function Vacancies() {
+interface VacanciesProps {
+  limit?: number
+}
+
+export default function Vacancies({ limit }: VacanciesProps) {
     const [content, setContent] = useState<VacanciesContent | null>(null)
     const [loading, setLoading] = useState(true)
+    const [isModalOpen, setIsModalOpen] = useState(false)
 
     useEffect(() => {
         async function fetchContent() {
@@ -45,20 +52,36 @@ export default function Vacancies() {
         return <div>Error loading content</div>
     }
 
+    // Limit vacancies if limit prop is provided
+    const displayedVacancies = limit ? content.vacancies?.slice(0, limit) : content.vacancies
+
     return (
         <div id='vacancies'>
             <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 mb-6 md:mb-10">
                 <p className='text-sm md:text-base text-orange-500'>{content.section}</p>
-                <div>
-                    <Button variant="outline">{content.button}</Button>
-                </div>
+                {content.button && (
+                    <div>
+                        <Link href="/vacancies">
+                            <Button variant="outline">{content.button}</Button>
+                        </Link>
+                    </div>
+                )}
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
-                {content.vacancies && content.vacancies.map((vacancy, index) => (
-                    <VacancyCard key={index} {...vacancy} />
+                {displayedVacancies && displayedVacancies.map((vacancy, index) => (
+                    <VacancyCard 
+                        key={index} 
+                        {...vacancy} 
+                        onOpenModal={() => setIsModalOpen(true)}
+                    />
                 ))}
             </div>
+
+            <QuestionnaireModal 
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+            />
         </div>
     )
 }

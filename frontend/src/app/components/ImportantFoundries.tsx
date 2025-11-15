@@ -1,13 +1,22 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
+import Link from 'next/link'
 import GridCards from './ui/GridCards'
+import { Button } from './ui/Button'
 import { getImportantFoundriesContent } from '@/lib/api'
-import { ImportantFoundriesContent } from '@/lib/contentful'
+import { ImportantFoundriesContent, Foundry } from '@/lib/contentful'
+import ContentModal from './ui/ContentModal'
 
-export default function ImportantFoundries() {
+interface ImportantFoundriesProps {
+  limit?: number
+}
+
+export default function ImportantFoundries({ limit }: ImportantFoundriesProps) {
   const [content, setContent] = useState<ImportantFoundriesContent | null>(null)
   const [loading, setLoading] = useState(true)
+  const [selectedFoundry, setSelectedFoundry] = useState<Foundry | null>(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   useEffect(() => {
     async function fetchContent() {
@@ -23,6 +32,16 @@ export default function ImportantFoundries() {
 
     fetchContent()
   }, [])
+
+  const handleOpenModal = (foundry: Foundry) => {
+    setSelectedFoundry(foundry)
+    setIsModalOpen(true)
+  }
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false)
+    setSelectedFoundry(null)
+  }
 
   if (loading) {
     return (
@@ -41,10 +60,30 @@ export default function ImportantFoundries() {
     return <div>Error loading content</div>
   }
 
+  // Limit foundries if limit prop is provided
+  const displayedFoundries = limit ? content.foundries.slice(0, limit) : content.foundries
+
   return (
-    <div id='fundraising' className='grid gap-10'>
-      <p className='text-1xl text-orange-500'>{content.section}</p>
-      <GridCards foundries={content.foundries} />
-    </div>
+    <>
+      <div id='fundraising' className='grid gap-10'>
+        <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
+          <p className='text-sm md:text-base text-orange-500'>{content.section}</p>
+          {content.button && (
+            <div>
+              <Link href="/foundries">
+                <Button variant="outline">{content.button}</Button>
+              </Link>
+            </div>
+          )}
+        </div>
+        <GridCards foundries={displayedFoundries} onOpenModal={handleOpenModal} />
+      </div>
+
+      <ContentModal 
+        content={selectedFoundry ? { ...selectedFoundry, type: 'foundry' } : null} 
+        isOpen={isModalOpen} 
+        onClose={handleCloseModal} 
+      />
+    </>
   )
 }

@@ -3,9 +3,11 @@ import React from 'react'
 import { Button } from './Button'
 import { Vacancy } from '@/lib/contentful'
 
-type VacancyCardProps = Vacancy
+type VacancyCardProps = Vacancy & {
+  onOpenModal?: () => void
+}
 
-const VacancyCard = ({ title, description, image, contract, salary, age, button }: VacancyCardProps) => {
+const VacancyCard = ({ title, description, image, contract, salary, age, button, onOpenModal }: VacancyCardProps) => {
   if (!image || !image.url) {
     return null
   }
@@ -41,7 +43,11 @@ const VacancyCard = ({ title, description, image, contract, salary, age, button 
       <div className="p-6 flex flex-col gap-4 flex-grow">
         <h3 className="text-2xl font-bold">{title}</h3>
         <p className="text-sm text-gray-300 flex-grow">{description}</p>
-        <Button className="self-start w-fit text-black">
+        <Button 
+          variant="default" 
+          className="self-start w-fit"
+          onClick={onOpenModal}
+        >
           {button}
         </Button>
       </div>

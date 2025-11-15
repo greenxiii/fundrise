@@ -35,6 +35,7 @@ export interface Foundry {
 export interface ImportantFoundriesContent {
   section: string
   foundries: Foundry[]
+  button?: string
 }
 
 export interface PaymentDetailsContent {

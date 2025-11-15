@@ -36,6 +36,7 @@ interface ContentfulImportantFoundriesFields {
   section?: string
   foundries?: ContentfulFoundryFields[]
   images?: ContentfulImageLink[]
+  button?: string
 }
 
 interface ContentfulReportFields {
@@ -178,12 +179,14 @@ export async function getImportantFoundriesContent(): Promise<ImportantFoundries
     
     return {
       section: fields.section || 'Важливі збори',
-      foundries
+      foundries,
+      button: fields.button || 'Усі збори'
     }
   } catch {
     // Return fallback data
     return {
       section: 'Важливі збори',
+      button: 'Усі збори',
       foundries: [
         {
           title: 'Назва Збору',

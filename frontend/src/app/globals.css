@@ -44,3 +44,66 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-unbounded), Arial, Helvetica, sans-serif;
 }
+
+/* Social icon colors - match secondary button border colors exactly */
+.social-icon-wrapper {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+}
+
+.social-icon {
+  filter: brightness(0) invert(1);
+  transition: opacity 0.2s;
+}
+
+/* Default: #FFFFFF (white) - matches border-[#FFFFFF] */
+.social-icon {
+  opacity: 1;
+}
+
+.social-icon-wrapper::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.2s;
+  mask-image: var(--icon-url);
+  -webkit-mask-image: var(--icon-url);
+  mask-size: contain;
+  -webkit-mask-size: contain;
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+  mask-position: center;
+  -webkit-mask-position: center;
+}
+
+/* Hover: #FFBB54 (bright orange) - matches hover:border-[#FFBB54] */
+.group:hover:not(:disabled) .social-icon-hover {
+  opacity: 0;
+}
+
+.group:hover:not(:disabled) .social-icon-wrapper::after {
+  opacity: 1;
+  background-color: #FFBB54;
+}
+
+/* Active: #FFFFFF (white) - matches active:border-[#FFFFFF] */
+.group:active:not(:disabled) .social-icon-hover {
+  opacity: 1;
+}
+
+.group:active:not(:disabled) .social-icon-wrapper::after {
+  opacity: 0;
+}
+
+/* Disabled: #5B3700 (dark brown) - matches disabled:border-[#5B3700] */
+.group:disabled .social-icon-hover {
+  opacity: 0;
+}
+
+.group:disabled .social-icon-wrapper::after {
+  opacity: 1;
+  background-color: #5B3700;
+}

@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import React from 'react'
 import { HeaderNav } from './HeaderNav'
+import { Button } from '../ui/Button'
 
 export const HEADER_CONTENT = {
   title: 'ПІДТРИМАЙ',
@@ -20,7 +21,29 @@ export default function Header() {
       <HeaderNav />
       
       {/* Main hero content */}
-      <div className="flex items-center justify-between flex-wrap h-full pt-20 px-4 sm:px-8 max-w-7xl w-full mx-auto">
+      <div className="flex flex-col md:flex-row items-center justify-between pt-40 md:pt-60 px-10 sm:px-8 max-w-7xl w-full mx-auto">
+        {/* Mobile - Main logo at top */}
+        <div className="flex md:hidden justify-center mb-8">
+          <div className="relative w-48 h-48 mb-10">
+            {/* Shadow layer behind main logo */}
+            <Image
+              src="/main_logo_shadow.png"
+              alt="Main logo shadow"
+              fill
+              className="object-contain"
+              priority
+            />
+            {/* Main logo on top */}
+            <Image
+              src="/main_logo.png"
+              alt="Main logo emblem"
+              fill
+              className="object-contain relative z-10"
+              priority
+            />
+          </div>
+        </div>
+        
         <div className="max-w-2xl w-full">
           <div className="space-y-4">
             <h1 className="text-white text-2xl sm:text-5xl font-bold leading-tight">
@@ -36,76 +59,91 @@ export default function Header() {
           
           {/* Support button and social icons */}
           <div className="flex items-center gap-6 mt-8">
-            <button className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 cursor-pointer font-bold text-lg transition-colors">
+            <Button 
+              variant="default"
+              size="default"
+              className="relative flex items-center justify-center gap-3"
+            >
               {HEADER_CONTENT.supportButton}
-            </button>
+            </Button>
             
             {/* Social media icons */}
             <div className="flex gap-4">
-              <div className="w-14 h-14 border border-white flex items-center justify-center hover:bg-white/20 transition-colors cursor-pointer">
-                <Image
-                  src="/instagram-line.svg"
-                  alt="Instagram"
-                  width={24}
-                  height={24}
-                />
-              </div>
-              <div className="w-14 h-14 border border-white flex items-center justify-center hover:bg-white/20 transition-colors cursor-pointer">
-                <Image
-                  src="/facebook-box-line.svg"
-                  alt="Facebook"
-                  width={24}
-                  height={24}
-                />
-              </div>
+              <Button 
+                variant="secondary"
+                size="default"
+                style={{ width: '44px', padding: '0' }}
+                className="group"
+                aria-label="Instagram"
+              >
+                <div 
+                  className="social-icon-wrapper group-hover:social-icon-orange"
+                  style={{ '--icon-url': 'url(/instagram-line.svg)' } as React.CSSProperties}
+                >
+                  <Image
+                    src="/instagram-line.svg"
+                    alt="Instagram"
+                    width={24}
+                    height={24}
+                    className="social-icon social-icon-hover"
+                  />
+                </div>
+              </Button>
+              <Button 
+                variant="secondary"
+                size="default"
+                style={{ width: '44px', padding: '0' }}
+                className="group"
+                aria-label="Facebook"
+              >
+                <div 
+                  className="social-icon-wrapper group-hover:social-icon-orange"
+                  style={{ '--icon-url': 'url(/facebook-box-line.svg)' } as React.CSSProperties}
+                >
+                  <Image
+                    src="/facebook-box-line.svg"
+                    alt="Facebook"
+                    width={24}
+                    height={24}
+                    className="social-icon social-icon-hover"
+                  />
+                </div>
+              </Button>
             </div>
           </div>
         </div>
         
-        {/* Right side - Hero shields images */}
-        <div className="flex-1 md:flex justify-center items-center">
-          <div className="flex items-center">
-            {/* First shield - layered images */}
-            <div className="relative w-52 h-60">
-              {/* Background shield */}
-              <Image
-                src="/hero_shield11.svg"
-                alt="First shield background"
-                fill
-                className="object-contain"
-                priority
-              />
-              {/* Foreground shield */}
-              <Image
-                src="/hero_shield1.svg"
-                alt="First shield foreground"
-                fill
-                className="object-contain"
-                priority
-              />
-            </div>
-            
-            {/* Second shield - layered images */}
-            <div className="relative w-32 h-40">
-              {/* Background shield */}
-              <Image
-                src="/hero_shield22.svg"
-                alt="Second shield background"
-                fill
-                className="object-contain"
-                priority
-              />
-              {/* Foreground shield */}
-              <Image
-                src="/hero_shield2.svg"
-                alt="Second shield foreground"
-                fill
-                className="object-contain"
-                priority
-              />
-            </div>
+        {/* Desktop - Right side - Main logo emblem */}
+        <div className="flex-1 hidden md:flex justify-center items-center">
+          <div className="relative w-60 h-60 md:w-72 md:h-72">
+            {/* Shadow layer behind main logo */}
+            <Image
+              src="/main_logo_shadow.png"
+              alt="Main logo shadow"
+              fill
+              className="object-contain"
+              priority
+            />
+            {/* Main logo on top */}
+            <Image
+              src="/main_logo.png"
+              alt="Main logo emblem"
+              fill
+              className="object-contain relative z-10"
+              priority
+            />
           </div>
         </div>
+      </div>
+      
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex justify-center">
+        <Image
+          src="/lg_1.png"
+          alt="Logo graphic"
+          width={76}
+          height={120}
+          className="object-contain"
+        />
       </div>
     </div>
   )
