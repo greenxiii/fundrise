@@ -83,7 +83,7 @@ export default function QuestionnaireModal({ isOpen, onClose }: QuestionnaireMod
               {/* First Name */}
               <div>
                 <label htmlFor="firstName" className="block text-white text-sm mb-2">
-                  Ім'я<span className="text-[#FFBB54]">*</span>
+                  Ім&apos;я<span className="text-[#FFBB54]">*</span>
                 </label>
                 <input
                   type="text"
