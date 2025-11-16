@@ -16,6 +16,7 @@ export default function Vacancies({ limit }: VacanciesProps) {
     const [content, setContent] = useState<VacanciesContent | null>(null)
     const [loading, setLoading] = useState(true)
     const [isModalOpen, setIsModalOpen] = useState(false)
+    const [selectedVacancyTitle, setSelectedVacancyTitle] = useState<string>('')
 
     useEffect(() => {
         async function fetchContent() {
@@ -73,14 +74,21 @@ export default function Vacancies({ limit }: VacanciesProps) {
                     <VacancyCard 
                         key={index} 
                         {...vacancy} 
-                        onOpenModal={() => setIsModalOpen(true)}
+                        onOpenModal={() => {
+                            setSelectedVacancyTitle(vacancy.title)
+                            setIsModalOpen(true)
+                        }}
                     />
                 ))}
             </div>
 
             <QuestionnaireModal 
                 isOpen={isModalOpen}
-                onClose={() => setIsModalOpen(false)}
+                onClose={() => {
+                    setIsModalOpen(false)
+                    setSelectedVacancyTitle('')
+                }}
+                vacancyTitle={selectedVacancyTitle}
             />
         </div>
     )
