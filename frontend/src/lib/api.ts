@@ -26,10 +26,8 @@ interface ContentfulImageLink {
 interface ContentfulFoundryFields {
   title?: string
   description?: string
-  button?: string
   image?: ContentfulImageLink
-  variant?: 'horizontal' | 'vertical'
-  size?: 'small' | 'medium' | 'large'
+  url?: string
 }
 
 interface ContentfulImportantFoundriesFields {
@@ -37,6 +35,22 @@ interface ContentfulImportantFoundriesFields {
   foundries?: ContentfulFoundryFields[]
   images?: ContentfulImageLink[]
   button?: string
+}
+
+interface ContentfulPaymentMethodFields {
+  name?: string  // Required: Payment method name (e.g., "Реквізити Фонду UAH")
+  details?: string  // Required: Payment details content (can contain newlines)
+  // Optional fields for backward compatibility:
+  title?: string  // Alternative to 'name'
+  content?: string  // Alternative to 'details'
+  icon?: ContentfulImageLink  // Optional: Icon image (not currently displayed)
+}
+
+interface ContentfulPaymentDetailsFields {
+  section?: string
+  title?: string
+  button?: string
+  paymentMethods?: ContentfulPaymentMethodFields[]
 }
 
 interface ContentfulReportFields {
@@ -167,13 +181,11 @@ export async function getImportantFoundriesContent(): Promise<ImportantFoundries
       return {
         title: foundry.title || '',
         description: foundry.description || '',
-        button: foundry.button || '',
         image: {
           url: matchedImage.url,
           title: matchedImage.title
         },
-        variant: foundry.variant || 'horizontal',
-        size: foundry.size || 'medium'
+        url: foundry.url || undefined
       }
     })
     
@@ -191,57 +203,42 @@ export async function getImportantFoundriesContent(): Promise<ImportantFoundries
         {
           title: 'Назва Збору',
           description: 'Опис збору. Ми збираємо на машинку, нам треба зібрати 40к, наразі маємо 10к. Якщо ти ухилес, то маєш взагали закрити збір...',
-          button: 'Задонатити',
           image: {
             url: '/block.webp',
             title: 'Foundry Image'
-          },
-          variant: 'horizontal',
-          size: 'medium',
+          }
         },
         {
           title: 'Назва Збору',
           description: 'Опис збору. Ми збираємо на машинку, нам треба зібрати 40к, наразі маємо 10к. Якщо ти ухилес, то маєш взагали закрити збір...',
-          button: 'Задонатити',
           image: {
             url: '/block.webp',
             title: 'Foundry Image'
-          },
-          variant: 'horizontal',
-          size: 'medium',
+          }
         },
         {
           title: 'Назва Збору',
           description: 'Опис збору. Ми збираємо на машинку, нам треба зібрати 40к, наразі маємо 10к. Якщо ти ухилес, то маєш взагали закрити збір...',
-          button: 'Задонатити',
           image: {
             url: '/block.webp',
             title: 'Foundry Image'
-          },
-          variant: 'vertical',
-          size: 'small',
+          }
         },
         {
           title: 'Назва Збору',
           description: 'Опис збору. Ми збираємо на машинку, нам треба зібрати 40к, наразі маємо 10к. Якщо ти ухилес, то маєш взагали закрити збір...',
-          button: 'Задонатити',
           image: {
             url: '/block.webp',
             title: 'Foundry Image'
-          },
-          variant: 'vertical',
-          size: 'small',
+          }
         },
         {
           title: 'Назва Збору',
           description: 'Опис збору. Ми збираємо на машинку, нам треба зібрати 40к, наразі маємо 10к. Якщо ти ухилес, то маєш взагали закрити збір...',
-          button: 'Задонатити',
           image: {
             url: '/block.webp',
             title: 'Foundry Image'
-          },
-          variant: 'vertical',
-          size: 'small',
+          }
         }
       ]
     }
@@ -267,33 +264,46 @@ export async function getPaymentDetailsContent(): Promise<PaymentDetailsContent>
     }
     
     const response = entries.items[0]
-    return response.fields as unknown as PaymentDetailsContent
-  } catch {
+    const fields = response.fields as unknown as ContentfulPaymentDetailsFields
+    
+    // Transform paymentMethods from Contentful format (name/details) to component format (title/content)
+    const paymentMethods = (fields.paymentMethods || []).map((method: ContentfulPaymentMethodFields) => ({
+      title: method.name || method.title || '',
+      content: method.details || method.content || ''
+    })).filter(method => method.title && method.content) // Filter out empty methods
+    
+    // If no valid payment methods, throw to use fallback
+    if (paymentMethods.length === 0) {
+      throw new Error('No valid payment methods found')
+    }
+    
+    return {
+      section: fields.section || 'Благодійний фонд',
+      title: fields.title || 'Фонд забезпечує дрони, техніку, екіпірування підтримуємо тих, хто тримає небо і землю.',
+      paymentMethods
+    }
+  } catch (error) {
+    console.error('Error fetching Payment Details from Contentful:', error)
     // Return fallback data
     return {
       section: 'Благодійний фонд',
       title: 'Фонд забезпечує дрони, техніку, екіпірування підтримуємо тих, хто тримає небо і землю.',
-      button: 'Дізнатись більше',
       paymentMethods: [
         {
           title: 'Реквізити Фонду UAH',
-          content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.'
+          content: 'МоноБанк:\nОтримувач\nБО "БФ "СУППОРТ 2-го МЕХАНІЗОВАНОГО БАТАЛЬЙОНУ"\nIBAN\nUA283220010000026009700005408\nЄДРПОУ\n45831069\n\nАкціонерне товариство\nУНІВЕРСАЛ БАНК\nМФО: 322001\nЄДРПОУ:\n21133352\n\n\nПриватБанк:\nОтримувач\nБО "БФ "СУППОРТ 2-го МЕХАНІЗОВАНОГО БАТАЛЬЙОНУ"\nIBAN\nUA343052990000026009005923755\nЄДРПОУ\n45831069\n\nАКЦІОНЕРНЕ ТОВАРИСТВО КОМЕРЦІЙНИЙ БАНК «ПРИВАТБАНК»\nМФО: 305299\nЄДРПОУ: 14360570'
         },
         {
           title: 'Реквізити Фонду EUR',
-          content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.'
+          content: 'Назва компанії / company Name: БО БФ СУППОРТ 2-ГО МЕХАН БАТАЛ\nIBAN Code: UA603052990000026000005926115\nНазва банку / Name of the bank: JSC CB "PRIVATBANK", 1D HRUSHEVSKOHO STR., KYIV, 01001, UKRAINE\nSWIFT code банку / Bank SWIFT Code: PBANUA2X\nАдреса компанії / Company address: 64309, УКРАЇНА, ОБЛ. ХАРКІВСЬКА, Р-Н. ІЗЮМСЬКИЙ, М. ІЗЮМ, ВУЛ. РІЗДВЯНА, Б. 9, КВ. 8.'
         },
         {
           title: 'Реквізити Фонду USD',
-          content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.'
+          content: 'Назва компанії / company Name: БО БФ СУППОРТ 2-ГО МЕХАН БАТАЛ\nIBAN Code: UA093052990000026002015933000\nНазва банку / Name of the bank: JSC CB "PRIVATBANK", 1D HRUSHEVSKOHO STR., KYIV, 01001, UKRAINE\nSWIFT code банку / Bank SWIFT Code: PBANUA2X\nАдреса компанії / Company address: 64309, УКРАЇНА, ОБЛ. ХАРКІВСЬКА, Р-Н. ІЗЮМСЬКИЙ, М. ІЗЮМ, ВУЛ. РІЗДВЯНА, Б. 9, КВ. 8.'
         },
         {
           title: 'Реквізити Фонду PAYPAL',
-          content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.'
-        },
-        {
-          title: 'Реквізити Crypto',
-          content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.'
+          content: 'cocf2mb@gmail.com'
         }
       ]
     }
@@ -422,7 +432,6 @@ export async function getVacanciesContent(): Promise<VacanciesContent> {
         contract: vacancy.contract || '',
         salary: vacancy.salary || '',
         age: vacancy.age || '',
-        button: vacancy.button || 'Долучитись',
         image: {
           url: matchedImage.url,
           title: matchedImage.title
@@ -449,7 +458,6 @@ export async function getVacanciesContent(): Promise<VacanciesContent> {
           contract: 'Контракт 18-24 -1 млн.грн',
           salary: 'Заробітня плата від 120к грн',
           age: 'Вік: від 18 до 25',
-          button: 'Долучитись',
           image: {
             url: '/blank.png',
             title: 'Vacancy Image'
@@ -635,9 +643,6 @@ export async function getReportsContent(): Promise<ReportsContent> {
       // Get image for this position, or use fallback
       const matchedImage = imageAssets[index] || { url: '/blank.png', title: 'Report Image' }
       
-      // First two reports are horizontal, rest are vertical (same pattern as foundries)
-      const variant: 'horizontal' | 'vertical' = index < 2 ? 'horizontal' : 'vertical'
-      
       return {
         title: report.title || '',
         date: report.date || '',
@@ -645,8 +650,7 @@ export async function getReportsContent(): Promise<ReportsContent> {
         image: {
           url: matchedImage.url,
           title: matchedImage.title
-        },
-        variant
+        }
       }
     })
     
@@ -673,8 +677,7 @@ export async function getReportsContent(): Promise<ReportsContent> {
           image: {
             url: '/blank.png',
             title: 'Report Image'
-          },
-          variant: 'horizontal'
+          }
         }
       ]
     }

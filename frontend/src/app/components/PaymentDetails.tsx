@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import { Button } from './ui/Button'
 import CollapseBlock from './ui/CollapseBlock'
 import { getPaymentDetailsContent } from '@/lib/api'
 import { PaymentDetailsContent } from '@/lib/contentful'
@@ -56,14 +55,6 @@ export default function PaymentOptions() {
                     <p className='text-white text-2xl sm:text-4xl md:text-5xl lg:text-5xl font-bold leading-tight'>
                         {content.title}
                     </p>
-                    {content.button && (
-                        <Button 
-                            variant="outline" 
-                            className="self-start mt-6 md:mt-12 cursor-pointer"
-                        >
-                            {content.button}
-                        </Button>
-                    )}
                 </div>
             </div>
 

@@ -1,7 +1,11 @@
+'use client'
+
 import Image from 'next/image'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { HeaderNav } from './HeaderNav'
 import { Button } from '../ui/Button'
+import { getContactContent } from '@/lib/api'
+import { ContactContent } from '@/lib/contentful'
 
 export const HEADER_CONTENT = {
   title: 'ПІДТРИМАЙ',
@@ -11,6 +15,20 @@ export const HEADER_CONTENT = {
 }
 
 export default function Header() {
+  const [contactData, setContactData] = useState<ContactContent | null>(null)
+
+  useEffect(() => {
+    async function fetchContactData() {
+      try {
+        const data = await getContactContent()
+        setContactData(data)
+      } catch (error) {
+        console.error('Error fetching contact data:', error)
+      }
+    }
+    fetchContactData()
+  }, [])
+
   return (
     <div 
       className="h-screen relative overflow-hidden bg-cover bg-center bg-no-repeat w-full"
@@ -69,46 +87,64 @@ export default function Header() {
             
             {/* Social media icons */}
             <div className="flex gap-4">
-              <Button 
-                variant="secondary"
-                size="default"
-                style={{ width: '44px', padding: '0' }}
-                className="group"
-                aria-label="Instagram"
-              >
-                <div 
-                  className="social-icon-wrapper group-hover:social-icon-orange"
-                  style={{ '--icon-url': 'url(/instagram-line.svg)' } as React.CSSProperties}
+              {contactData?.instagramUrl && (
+                <a 
+                  href={contactData.instagramUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Instagram"
                 >
-                  <Image
-                    src="/instagram-line.svg"
-                    alt="Instagram"
-                    width={24}
-                    height={24}
-                    className="social-icon social-icon-hover"
-                  />
-                </div>
-              </Button>
-              <Button 
-                variant="secondary"
-                size="default"
-                style={{ width: '44px', padding: '0' }}
-                className="group"
-                aria-label="Facebook"
-              >
-                <div 
-                  className="social-icon-wrapper group-hover:social-icon-orange"
-                  style={{ '--icon-url': 'url(/facebook-box-line.svg)' } as React.CSSProperties}
+                  <Button 
+                    variant="secondary"
+                    size="default"
+                    style={{ width: '44px', padding: '0' }}
+                    className="group"
+                    aria-label="Instagram"
+                  >
+                    <div 
+                      className="social-icon-wrapper group-hover:social-icon-orange"
+                      style={{ '--icon-url': 'url(/instagram-line.svg)' } as React.CSSProperties}
+                    >
+                      <Image
+                        src="/instagram-line.svg"
+                        alt="Instagram"
+                        width={24}
+                        height={24}
+                        className="social-icon social-icon-hover"
+                      />
+                    </div>
+                  </Button>
+                </a>
+              )}
+              {contactData?.facebookUrl && (
+                <a 
+                  href={contactData.facebookUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Facebook"
                 >
-                  <Image
-                    src="/facebook-box-line.svg"
-                    alt="Facebook"
-                    width={24}
-                    height={24}
-                    className="social-icon social-icon-hover"
-                  />
-                </div>
-              </Button>
+                  <Button 
+                    variant="secondary"
+                    size="default"
+                    style={{ width: '44px', padding: '0' }}
+                    className="group"
+                    aria-label="Facebook"
+                  >
+                    <div 
+                      className="social-icon-wrapper group-hover:social-icon-orange"
+                      style={{ '--icon-url': 'url(/facebook-box-line.svg)' } as React.CSSProperties}
+                    >
+                      <Image
+                        src="/facebook-box-line.svg"
+                        alt="Facebook"
+                        width={24}
+                        height={24}
+                        className="social-icon social-icon-hover"
+                      />
+                    </div>
+                  </Button>
+                </a>
+              )}
             </div>
           </div>
         </div>

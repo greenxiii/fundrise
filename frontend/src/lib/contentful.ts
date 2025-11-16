@@ -23,13 +23,11 @@ export interface AboutUsContent {
 export interface Foundry {
   title: string
   description: string
-  button: string
   image: {
     url: string
     title: string
   }
-  variant: 'horizontal' | 'vertical'
-  size: 'small' | 'medium' | 'large'
+  url?: string
 }
 
 export interface ImportantFoundriesContent {
@@ -41,7 +39,6 @@ export interface ImportantFoundriesContent {
 export interface PaymentDetailsContent {
   section: string
   title: string
-  button: string
   paymentMethods: Array<{
     title: string
     content: string
@@ -67,7 +64,6 @@ export interface Vacancy {
   contract?: string
   salary?: string
   age?: string
-  button: string
 }
 
 export interface VacanciesContent {
@@ -118,14 +114,13 @@ export interface DivisionsContent {
 }
 
 export interface Report {
-  title: string
+  title?: string
   date: string
   description: string
   image: {
     url: string
     title: string
   }
-  variant: 'horizontal' | 'vertical'
 }
 
 export interface ReportsContent {

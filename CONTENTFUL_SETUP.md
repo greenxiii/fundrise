@@ -92,6 +92,19 @@ NEXT_PUBLIC_CONTENTFUL_PREVIEW_ACCESS_TOKEN=your_preview_token_here
   - `description` (Long text)
   - `file` (Media - Files, optional)
 
+### 3.7 Contact (Single Entry)
+**Content Type ID:** `contact`
+
+**Fields:**
+- `title` (Short text) - "ПРИЄДНУЙСЯ — КОЖНА ДОПОМОГА ВАЖЛИВА ДЛЯ НАШИХ ЗАХИСНИКІВ."
+- `description` (Long text) - Description text for the contact section
+- `phone` (Short text) - Phone number (e.g., "+380937823787")
+- `email` (Short text) - Email address (e.g., "charitableorganization@gmail.com")
+- `instagramUrl` (Short text, optional) - Instagram profile URL (used in header and contact section)
+- `facebookUrl` (Short text, optional) - Facebook profile URL (used in header and contact section)
+
+**Note:** The `instagramUrl` and `facebookUrl` fields are used in both the hero section header and the contact section at the bottom of the page.
+
 ## 4. How to Create Content Models in Contentful
 
 1. **Go to Content Model tab** in your Contentful space

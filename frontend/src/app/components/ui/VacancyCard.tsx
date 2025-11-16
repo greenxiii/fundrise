@@ -7,10 +7,13 @@ type VacancyCardProps = Vacancy & {
   onOpenModal?: () => void
 }
 
-const VacancyCard = ({ title, description, image, contract, salary, age, button, onOpenModal }: VacancyCardProps) => {
+const VacancyCard = ({ title, description, image, contract, salary, age, onOpenModal }: VacancyCardProps) => {
   if (!image || !image.url) {
     return null
   }
+  
+  // Hardcoded button text
+  const buttonText = 'Долучитись'
   
   return (
     <div className="text-white relative bg-[#1c1c1c] overflow-hidden h-full flex flex-col">
@@ -48,7 +51,7 @@ const VacancyCard = ({ title, description, image, contract, salary, age, button,
           className="self-start w-fit"
           onClick={onOpenModal}
         >
-          {button}
+          {buttonText}
         </Button>
       </div>
     </div>
