@@ -1,6 +1,7 @@
 'use client'
 
 import Image from 'next/image'
+import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import { HeaderNav } from './HeaderNav'
 import { Button } from '../ui/Button'
@@ -77,13 +78,15 @@ export default function Header() {
           
           {/* Support button and social icons */}
           <div className="flex items-center gap-6 mt-8">
-            <Button 
-              variant="default"
-              size="default"
-              className="relative flex items-center justify-center gap-3"
-            >
-              {HEADER_CONTENT.supportButton}
-            </Button>
+            <Link href="#charity">
+              <Button 
+                variant="default"
+                size="default"
+                className="relative flex items-center justify-center gap-3"
+              >
+                {HEADER_CONTENT.supportButton}
+              </Button>
+            </Link>
             
             {/* Social media icons */}
             <div className="flex gap-4">
