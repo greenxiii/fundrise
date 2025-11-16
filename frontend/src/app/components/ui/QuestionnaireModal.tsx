@@ -19,7 +19,6 @@ export default function QuestionnaireModal({ isOpen, onClose, vacancyTitle }: Qu
     telegram: '',
     isServiceman: '',
     age18to58: false,
-    privacyPolicy: true,
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitError, setSubmitError] = useState<string | null>(null)
@@ -75,7 +74,6 @@ export default function QuestionnaireModal({ isOpen, onClose, vacancyTitle }: Qu
       formData.patronymic.trim() !== '' &&
       formData.phone.trim() !== '' &&
       validatePhone(formData.phone) &&
-      formData.privacyPolicy &&
       !phoneError
     )
   }
@@ -87,10 +85,6 @@ export default function QuestionnaireModal({ isOpen, onClose, vacancyTitle }: Qu
     // Validate phone before submission
     if (!validatePhone(formData.phone)) {
       setPhoneError('Введіть коректний номер телефону (наприклад: +380XXXXXXXXX або 0XXXXXXXXX)')
-      return
-    }
-    
-    if (!formData.privacyPolicy) {
       return
     }
     
@@ -127,7 +121,6 @@ export default function QuestionnaireModal({ isOpen, onClose, vacancyTitle }: Qu
         telegram: '',
         isServiceman: '',
         age18to58: false,
-        privacyPolicy: true,
       })
       
       // Close modal after 2 seconds
@@ -156,13 +149,6 @@ export default function QuestionnaireModal({ isOpen, onClose, vacancyTitle }: Qu
         <div className="mb-8 space-y-2 text-white text-sm md:text-base">
           <p>
             Для того щоб потрапити до лав III Окремої Штурмової Бригади необхідно подати заявку заповнивши анкету.
-          </p>
-          <p>
-            Для іноземних громадян - інформація за{' '}
-            <a href="#" className="text-[#FFBB54] underline hover:text-[#FFBB54]">
-              посиланням
-            </a>
-            .
           </p>
         </div>
 
@@ -316,31 +302,6 @@ export default function QuestionnaireModal({ isOpen, onClose, vacancyTitle }: Qu
                 </label>
               </div>
 
-              {/* Privacy Policy checkbox */}
-              <div>
-                <label className="text-white cursor-pointer">
-                  <input
-                    type="checkbox"
-                    name="privacyPolicy"
-                    checked={formData.privacyPolicy}
-                    onChange={handleInputChange}
-                    required
-                    className="mr-2 w-4 h-4 bg-[#1c1c1c] border border-white focus:ring-[#FFBB54] focus:ring-offset-0 appearance-none checked:bg-[#FFBB54] checked:border-[#FFBB54] relative"
-                    style={{
-                      backgroundImage: formData.privacyPolicy 
-                        ? "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' d='M4 8l2 2 6-6'/%3E%3C/svg%3E\")"
-                        : 'none',
-                      backgroundSize: 'contain',
-                      backgroundPosition: 'center',
-                      backgroundRepeat: 'no-repeat'
-                    }}
-                  />
-                  Натискаючи кнопку нижче щоб продовжити ви погоджуєтесь з нашою{' '}
-                  <a href="#" className="text-[#FFBB54] underline hover:text-[#FFBB54]">
-                    Політикою конфіденційності
-                  </a>
-                </label>
-              </div>
             </div>
           </div>
 
