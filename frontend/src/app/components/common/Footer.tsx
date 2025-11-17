@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 import { Button } from '../ui/Button'
 import { LogoBlock } from '../ui/LogoBlock'
 import { NAV_LINKS } from './constants'
@@ -19,7 +20,9 @@ export default function Footer() {
                         </a>
                     ))}
                 </nav>
-                <Button>{FOOTER_CONTENT.button}</Button>
+                <Link href="#charity">
+                    <Button>{FOOTER_CONTENT.button}</Button>
+                </Link>
             </div>
         </div>
     )
