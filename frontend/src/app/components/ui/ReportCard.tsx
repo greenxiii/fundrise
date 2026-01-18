@@ -6,21 +6,10 @@ import { Button } from './Button'
 import { Report } from '@/lib/contentful'
 
 type ReportCardProps = Report & {
-  variant: 'horizontal' | 'vertical'
-  isLessThanFive?: boolean
   onOpenModal: (report: Report) => void
 }
 
-const ReportCard = ({ title, description, image, variant, date, isLessThanFive, onOpenModal }: ReportCardProps) => {
-  const isVertical = variant === 'vertical';
-  // Force single column on mobile; only span multiple columns on md+
-  // When less than 5 cards, vertical cards span 1 column (for 3-column grid)
-  // When 5+ cards, vertical cards span 2 columns (for 6-column grid)
-  const containerClasses = isVertical
-    ? isLessThanFive
-      ? 'grid-cols-1 md:col-span-1'
-      : 'grid-cols-1 md:row-start-2 md:col-span-2'
-    : 'grid-cols-1 sm:grid-cols-2 md:row-start-1 md:col-span-3'
+const ReportCard = ({ title, description, image, date, onOpenModal }: ReportCardProps) => {
   
   // Truncate description for preview (first 100 characters)
   const previewText = description.length > 100 
@@ -32,7 +21,7 @@ const ReportCard = ({ title, description, image, variant, date, isLessThanFive, 
   }
   
   return (
-    <div className={`text-white ${containerClasses} h-full`}>
+    <div className="text-white h-full">
       <div className="relative w-full h-auto md:h-[300px]">
         <Image 
           src={image.url} 
